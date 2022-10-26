@@ -39,7 +39,7 @@ export type UserLoginAttributes = {
   password: string;
 };
 
-type UserRegisterAttributes = {
+export type UserRegisterAttributes = {
   email: string;
   password: string;
   firstname: string;

@@ -46,6 +46,7 @@ const RootStackNavi = () => {
 };
 
 const RootNavigator = () => {
+
   return (
     <NavigationContainer theme={theme}>
       <RootStackNavi />
