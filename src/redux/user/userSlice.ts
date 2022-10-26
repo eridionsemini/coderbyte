@@ -1,0 +1,174 @@
+import {createAsyncThunk, createSlice, Dispatch} from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from '../instance';
+
+type AsyncThunkConfig = {
+  state?: unknown;
+  dispatch?: Dispatch;
+  extra?: unknown;
+  rejectValue?: unknown;
+  serializedErrorType?: unknown;
+  pendingMeta?: unknown;
+  fulfilledMeta?: unknown;
+  rejectedMeta?: unknown;
+};
+
+type LoginData = {
+  access_token: string;
+  refresh_token: string;
+};
+
+type RegisterData = {
+  access_token: string;
+  refresh_token: string;
+};
+
+type UserUpdateAttributes = {
+  id: number;
+  email: string;
+  firstname: string;
+  lastname: string;
+};
+
+type MyKnownError = {
+  error: string;
+};
+
+export type UserLoginAttributes = {
+  email: string;
+  password: string;
+};
+
+type UserRegisterAttributes = {
+  email: string;
+  password: string;
+  firstname: string;
+  lastname: string;
+};
+
+type User = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  email: string;
+  hashedRt: null | string;
+  firstname: string;
+  lastname: string;
+};
+
+type SliceState = {
+  token: null | string;
+  refreshToken: null | string;
+  user: null | User;
+};
+
+export const login = createAsyncThunk<
+  LoginData,
+  UserLoginAttributes,
+  AsyncThunkConfig
+>('user/login', async (user, thunkAPI) => {
+  const {email, password} = user;
+  const req = '/auth/login';
+  const body = {
+    email,
+    password,
+  };
+
+  try {
+    const res = (await axios.post(req, body)) as LoginData;
+    await AsyncStorage.setItem('token', res.access_token);
+    return res;
+  } catch (e: any) {
+    console.log('error from login', e);
+    return thunkAPI.rejectWithValue({error: e.mesaage} as MyKnownError);
+  }
+});
+
+export const register = createAsyncThunk<
+  RegisterData,
+  UserRegisterAttributes,
+  AsyncThunkConfig
+>('user/register', async (user, thunkAPI) => {
+  const {email, password, firstname, lastname} = user;
+  const req = '/auth/signup';
+  const body = {
+    email,
+    password,
+    firstname,
+    lastname,
+  };
+  try {
+    return (await axios.post(req, body)) as RegisterData;
+  } catch (e: any) {
+    return thunkAPI.rejectWithValue({error: e.mesaage} as MyKnownError);
+  }
+});
+
+export const logout = createAsyncThunk<boolean, {}, AsyncThunkConfig>(
+  'user/logout',
+  async () => {
+    const req = '/auth/logout';
+    try {
+      return await axios.post(req);
+    } catch (e) {
+      return false;
+    }
+  },
+);
+
+export const getCurrentUser = createAsyncThunk<User, {}, AsyncThunkConfig>(
+  'user/getMe',
+  async (data, thunkAPI) => {
+    const req = '/users/me';
+    try {
+      return (await axios.get(req)) as User;
+    } catch (e: any) {
+      console.log('err', e);
+      return thunkAPI.rejectWithValue({error: e.mesaage} as MyKnownError);
+    }
+  },
+);
+
+export const updateUser = createAsyncThunk<
+  User,
+  UserUpdateAttributes,
+  AsyncThunkConfig
+>('user/update', async (user, thunkAPI) => {
+  const {id, email, firstname, lastname} = user;
+  const req = `/users/${id}`;
+  const body = {
+    email,
+    firstname,
+    lastname,
+  };
+  try {
+    return (await axios.post(req, body)) as User;
+  } catch (e: any) {
+    return thunkAPI.rejectWithValue({error: e.mesaage} as MyKnownError);
+  }
+});
+
+const userSlice = createSlice({
+  name: 'userSlice',
+  initialState: {
+    token: null,
+    refreshToken: null,
+    user: null,
+  } as SliceState,
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.token = action.payload.access_token;
+      state.refreshToken = action.payload.access_token;
+    });
+    builder.addCase(register.fulfilled, (state, action) => {
+      state.token = action.payload.access_token;
+      state.refreshToken = action.payload.access_token;
+    });
+    builder.addCase(getCurrentUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+    });
+  },
+});
+
+export default userSlice.reducer;
