@@ -85,7 +85,7 @@ const Register: React.FC<{
         </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={setOption} style={styles.backLogin}>
-        <Text style={styles.backLoginText}>Or go back to login</Text>
+        <Text style={styles.backLoginText}>Back to login</Text>
       </TouchableOpacity>
     </View>
   );

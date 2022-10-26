@@ -9,5 +9,6 @@ export const colors = {
   water: '#8ABCF5',
   yellow: '#F5DA82',
   GREY: '#F5F3F6',
-  DARK_GREY:'#F2F2F2'
+  DARK_GREY: '#F2F2F2',
+  LIGHT_GREY: '#F8F8FC',
 };

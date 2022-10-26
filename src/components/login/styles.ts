@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     color: colors.BLACK,
     width: wp('100%') - 32,
     marginHorizontal: 16,
-    paddingHorizontal: 12,
-    backgroundColor: colors.GREY,
+    paddingHorizontal: 16,
+    backgroundColor: colors.LIGHT_GREY,
     borderRadius: 20,
     marginBottom: 20,
   },
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     width: wp('100%') - 128,
     marginHorizontal: 64,
     borderRadius: 20,
-    backgroundColor: colors.GREY,
+    backgroundColor: colors.LIGHT_GREY,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 50,
@@ -64,8 +64,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 10,
   },
-  or: {
-    marginVertical: 15,
+  createAccountText: {
+    color: colors.BLACK,
+    fontSize: 16,
   },
 });
 

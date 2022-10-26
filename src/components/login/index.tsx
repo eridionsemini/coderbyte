@@ -49,7 +49,7 @@ const Login: React.FC<{
         </Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.createAccountLogin} onPress={setOption}>
-        <Text>Create Account</Text>
+        <Text style={styles.createAccountText}>Create Account</Text>
       </TouchableOpacity>
     </View>
   );
