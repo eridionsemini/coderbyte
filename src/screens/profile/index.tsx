@@ -1,58 +1,58 @@
-import React, {useRef, useState} from 'react';
-import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
-import {useDispatch} from 'react-redux';
-import type {AppDispatch} from '../../redux';
-import {
-  getCurrentUser,
-  login,
-  register,
-  UserLoginAttributes,
-  UserRegisterAttributes,
-} from '../../redux/user/userSlice';
-import AuthModal, {IModal} from '../../popup/auth';
-import {AuthOptions} from './types';
-import Login from '../../components/login';
-import Register from '../../components/register';
+import React from 'react';
+import {SafeAreaView, View, TouchableOpacity, Text} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {logout} from '../../redux/user/userSlice';
+import {RootState, AppDispatch} from '../../redux';
+import {ProfileStackProps} from '../../navigators/types';
+import Auth from '../../components/auth';
+import {getFirstLetter} from '../../utils/utils';
+import styles from './styles';
 
-const Profile = () => {
-  const [option, setOption] = useState<AuthOptions>(AuthOptions.LOGIN);
-  const modalRef = useRef<IModal>();
+// @ts-ignore
+import User from '../../assets/icons/user.svg';
+
+const Profile: React.FC<{
+  navigation: ProfileStackProps['navigation'];
+}> = ({navigation}) => {
+  const {user} = useSelector((state: RootState) => state.user);
   const useAppDispatch: () => AppDispatch = useDispatch;
   const dispatch = useAppDispatch();
 
-  const tryLogin = async (email: string, password: string) => {
-    const data: UserLoginAttributes = {email, password};
-    await dispatch(login(data));
-    await dispatch(getCurrentUser({}));
-  };
-
-  const tryRegister = async (
-    email: string,
-    password: string,
-    firstname: string,
-    lastname: string,
-  ) => {
-    const data: UserRegisterAttributes = {email, password, firstname, lastname};
-    await dispatch(register(data));
-    await dispatch(getCurrentUser({}));
+  const tryLogout = () => {
+    dispatch(logout({}));
   };
 
   return (
     <SafeAreaView>
       <View>
-        <AuthModal ref={modalRef as React.RefObject<AuthModal>}>
-          {option === AuthOptions.LOGIN ? (
-            <Login
-              tryLogin={tryLogin}
-              setOption={() => setOption(AuthOptions.REGISTER)}
-            />
-          ) : (
-            <Register
-              tryRegister={tryRegister}
-              setOption={() => setOption(AuthOptions.LOGIN)}
-            />
-          )}
-        </AuthModal>
+        {!user ? (
+          <Auth
+            title="Seems that you are logged out"
+            description="Please login or register to enjoy the full features of or app"
+          />
+        ) : (
+          <View style={styles.profileContainer}>
+            <View style={styles.imageWrapper}>
+              <User />
+              <Text style={styles.name}>
+                {getFirstLetter(user.firstname)} {getFirstLetter(user.lastname)}
+              </Text>
+            </View>
+            <Text style={styles.userInfo}>
+              {user.firstname} {user.lastname}
+            </Text>
+            <View style={styles.actions}>
+              <TouchableOpacity
+                style={styles.editButton}
+                onPress={() => navigation.navigate('userEdit')}>
+                <Text style={styles.editText}>Edit</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.logoutButton} onPress={tryLogout}>
+                <Text style={styles.logoutText}>Logout</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );

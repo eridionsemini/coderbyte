@@ -18,6 +18,7 @@ const Home: React.FC<{
 }> = ({navigation}) => {
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(20);
+
   const req = {
     offset,
     limit,
@@ -25,6 +26,7 @@ const Home: React.FC<{
   const useAppDispatch: () => AppDispatch = useDispatch;
   const dispatch = useAppDispatch();
   const {user} = useSelector((state: RootState) => state.user);
+
   const {data, isError, isFetching, isLoading} = useGetPokemonQuery(req);
 
   useEffect(() => {

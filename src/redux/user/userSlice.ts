@@ -23,7 +23,7 @@ type RegisterData = {
   refresh_token: string;
 };
 
-type UserUpdateAttributes = {
+export type UserUpdateAttributes = {
   id: number;
   email: string;
   firstname: string;
@@ -60,6 +60,12 @@ type SliceState = {
   token: null | string;
   refreshToken: null | string;
   user: null | User;
+};
+
+type UpdateUserBody = {
+  email: string;
+  firstname: string;
+  lastname: string;
 };
 
 export const login = createAsyncThunk<
@@ -100,7 +106,7 @@ export const register = createAsyncThunk<
   try {
     return (await axios.post(req, body)) as RegisterData;
   } catch (e: any) {
-    return thunkAPI.rejectWithValue({error: e.mesaage} as MyKnownError);
+    return thunkAPI.rejectWithValue({error: e.message} as MyKnownError);
   }
 });
 
@@ -124,7 +130,7 @@ export const getCurrentUser = createAsyncThunk<User, {}, AsyncThunkConfig>(
       return (await axios.get(req)) as User;
     } catch (e: any) {
       console.log('err', e);
-      return thunkAPI.rejectWithValue({error: e.mesaage} as MyKnownError);
+      return thunkAPI.rejectWithValue({error: e.message} as MyKnownError);
     }
   },
 );
@@ -136,15 +142,15 @@ export const updateUser = createAsyncThunk<
 >('user/update', async (user, thunkAPI) => {
   const {id, email, firstname, lastname} = user;
   const req = `/users/${id}`;
-  const body = {
+  const body: UpdateUserBody = {
     email,
     firstname,
     lastname,
   };
   try {
-    return (await axios.post(req, body)) as User;
+    return (await axios.put(req, body)) as User;
   } catch (e: any) {
-    return thunkAPI.rejectWithValue({error: e.mesaage} as MyKnownError);
+    return thunkAPI.rejectWithValue({error: e.message} as MyKnownError);
   }
 });
 
@@ -166,6 +172,9 @@ const userSlice = createSlice({
       state.refreshToken = action.payload.access_token;
     });
     builder.addCase(getCurrentUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+    });
+    builder.addCase(updateUser.fulfilled, (state, action) => {
       state.user = action.payload;
     });
   },

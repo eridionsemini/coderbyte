@@ -56,7 +56,7 @@ export const getUserWishes = createAsyncThunk<WishesData, {}, AsyncThunkConfig>(
     try {
       return (await axios.get(req)) as WishesData;
     } catch (e: any) {
-      return thunkAPI.rejectWithValue({error: e.mesaage} as MyKnownError);
+      return thunkAPI.rejectWithValue({error: e.message} as MyKnownError);
     }
   },
 );
@@ -79,7 +79,7 @@ export const addPokemonToWishes = createAsyncThunk<
     thunkAPI.dispatch(appendNewWish(res));
     return res;
   } catch (e: any) {
-    return thunkAPI.rejectWithValue({error: e.mesaage} as MyKnownError);
+    return thunkAPI.rejectWithValue({error: e.message} as MyKnownError);
   }
 });
 
@@ -92,7 +92,7 @@ export const deleteWish = createAsyncThunk<boolean, number, AsyncThunkConfig>(
       thunkAPI.dispatch(removeWish(id));
       return res;
     } catch (e: any) {
-      return thunkAPI.rejectWithValue({error: e.mesaage} as MyKnownError);
+      return thunkAPI.rejectWithValue({error: e.message} as MyKnownError);
     }
   },
 );
@@ -114,6 +114,7 @@ const wishSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(getUserWishes.fulfilled, (state, action) => {
       state.list = action.payload;
+      state.loading = false;
     });
     builder.addCase(getUserWishes.pending, state => {
       state.loading = true;

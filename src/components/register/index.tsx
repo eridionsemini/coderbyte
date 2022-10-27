@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, TouchableOpacity, Text, TextInput} from 'react-native';
+import {isValidEmail} from '../../utils/utils';
 import styles from './styles';
 
 const Register: React.FC<{
@@ -15,6 +16,11 @@ const Register: React.FC<{
   const [password, setPassword] = useState<string>('');
   const [firstname, setFirstname] = useState<string>('');
   const [lastname, setLastname] = useState<string>('');
+  const [errorMsg, setErrorMsg] = useState<string>('');
+  const [validMail, setValidMail] = useState<boolean>(true);
+  const [validPassword, setValidPassword] = useState<boolean>(true);
+  const [validFirstname, setValidFirstname] = useState<boolean>(true);
+  const [validLastname, setValidLastname] = useState<boolean>(true);
   const emailRef = React.createRef<TextInput>();
   const passwordRef = React.createRef<TextInput>();
   const firstnameRef = React.createRef<TextInput>();
@@ -26,50 +32,90 @@ const Register: React.FC<{
     );
   };
 
+  const submit = () => {
+    if (!isValidEmail(email)) {
+      setValidMail(false);
+      setErrorMsg('Email not valid');
+      return;
+    }
+    if (password.trim().length < 6) {
+      setValidPassword(false);
+      setErrorMsg('Password must be at least 6 characters');
+      return;
+    }
+    if (!firstname.trim()) {
+      setValidFirstname(false);
+      setErrorMsg('Firstname cannot be empty');
+      return;
+    }
+
+    if (!lastname.trim()) {
+      setValidLastname(false);
+      setErrorMsg('Lastname cannot be empty');
+      return;
+    }
+
+    tryRegister(email, password, firstname, lastname);
+  };
+
   return (
     <View style={styles.register}>
       <Text style={styles.title}>Register to Pokedex</Text>
       <TextInput
-        style={styles.input}
+        style={validMail ? styles.input : styles.inputError}
         value={email}
         ref={emailRef}
         returnKeyType="next"
         onSubmitEditing={() => firstnameRef.current?.focus()}
         placeholder="email"
-        onChangeText={setEmail}
+        onChangeText={text => {
+          setEmail(text);
+          setValidMail(true);
+        }}
       />
+      {!validMail ? <Text style={styles.error}>{errorMsg}</Text> : null}
       <TextInput
-        style={styles.input}
+        style={validFirstname ? styles.input : styles.inputError}
         value={firstname}
         ref={firstnameRef}
         returnKeyType="next"
         onSubmitEditing={() => lastnameRef.current?.focus()}
         placeholder="firstname"
-        onChangeText={setFirstname}
+        onChangeText={text => {
+          setFirstname(text);
+          setValidFirstname(true);
+        }}
       />
+      {!validFirstname ? <Text style={styles.error}>{errorMsg}</Text> : null}
       <TextInput
-        style={styles.input}
+        style={validLastname ? styles.input : styles.inputError}
         value={lastname}
         ref={lastnameRef}
         returnKeyType="next"
         onSubmitEditing={() => passwordRef.current?.focus()}
         placeholder="lastname"
-        onChangeText={setLastname}
+        onChangeText={text => {
+          setLastname(text);
+          setValidLastname(true);
+        }}
       />
+      {!validLastname ? <Text style={styles.error}>{errorMsg}</Text> : null}
       <TextInput
-        style={styles.input}
+        style={validPassword ? styles.input : styles.inputError}
         value={password}
         ref={passwordRef}
         returnKeyType="go"
-        onSubmitEditing={() =>
-          tryRegister(email, password, firstname, lastname)
-        }
+        onSubmitEditing={submit}
         placeholder="password"
-        onChangeText={setPassword}
+        onChangeText={text => {
+          setPassword(text);
+          setValidPassword(true);
+        }}
       />
+      {!validPassword ? <Text style={styles.error}>{errorMsg}</Text> : null}
       <TouchableOpacity
         disabled={defineDisable()}
-        onPress={() => tryRegister(email, password, firstname, lastname)}
+        onPress={submit}
         style={
           defineDisable()
             ? styles.registerButtonDisabled

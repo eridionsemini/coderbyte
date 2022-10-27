@@ -22,6 +22,18 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 20,
   },
+  inputError: {
+    height: 40,
+    color: colors.BLACK,
+    width: wp('100%') - 32,
+    marginHorizontal: 16,
+    paddingHorizontal: 16,
+    backgroundColor: colors.LIGHT_GREY,
+    borderRadius: 20,
+    marginBottom: 20,
+    borderColor: 'red',
+    borderWidth: 1,
+  },
   registerButton: {
     height: 40,
     width: wp('100%') - 128,
@@ -58,6 +70,11 @@ const styles = StyleSheet.create({
   backLoginText: {
     color: colors.BLACK,
     fontSize: 16,
+  },
+  error: {
+    fontSize: 12,
+    color: 'red',
+    marginBottom: 8,
   },
 });
 

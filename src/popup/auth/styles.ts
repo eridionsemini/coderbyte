@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     paddingBottom: 20,
   },
+  outTouch: {
+    flex: 1,
+    width: '100%',
+  },
 });
 
 export default styles;

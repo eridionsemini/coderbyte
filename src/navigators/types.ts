@@ -1,4 +1,4 @@
-import {BottomTabScreenProps,BottomTabBarProps} from '@react-navigation/bottom-tabs';
+import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {StackScreenProps} from '@react-navigation/stack';
 
 export type BottomTabNaviParams = {
@@ -26,7 +26,10 @@ export type HomeStackParamList = {
 
 export type ProfileStackParamList = {
   userProfile: undefined;
+  userEdit: undefined;
 };
+
+export type ProfileStackProps = StackScreenProps<ProfileStackParamList>;
 
 export type WishStackParamList = {
   userWish: undefined;

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView, View, Text, TextInput} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
+import {useIsFocused} from '@react-navigation/native';
 import {RootStackProps} from '../../navigators/types';
 import WishList from '../../components/lists/wish';
 import {RootState, AppDispatch} from '../../redux';
@@ -14,14 +15,15 @@ const Wish: React.FC<{
   const {loading, list} = useSelector((state: RootState) => state.wish);
   const useAppDispatch: () => AppDispatch = useDispatch;
   const dispatch = useAppDispatch();
+  const focused = useIsFocused();
 
   useEffect(() => {
-    if (!loading && list.length === 0) {
+    if (focused && !loading && list.length === 0) {
       dispatch(getUserWishes({}));
     }
-  }, [navigation]);
+  }, [focused]);
 
-  console.log('list',list);
+  console.log('list', list);
 
   const ListHeaderComponent = () => {
     return (

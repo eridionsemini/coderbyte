@@ -5,14 +5,14 @@ export const extendedPokemonSlice = apiSlice.injectEndpoints({
     getPokemon: build.query({
       async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
         /// fetch initial Pokemons
+        console.log('_arg',_arg);
         const {limit, offset} = _arg;
         const data = await fetchWithBQ(`?offset=${offset}&limit=${limit}`);
         if (data.error) {
           return {error: data.error};
         }
         const pokemons = data.data;
-
-        const resultArray = await Promise.all(
+        const results = await Promise.all(
           pokemons.results.map(async i => {
             const detail = await fetchWithBQ(i.url);
             return {
@@ -25,9 +25,12 @@ export const extendedPokemonSlice = apiSlice.injectEndpoints({
             };
           }),
         );
-        return resultArray.length !== 0
-          ? {data: resultArray}
-          : {error: 'error'};
+
+        const merged = [].concat(...results);
+
+        console.log('_queryApi', _extraOptions, fetchWithBQ);
+
+        return merged.length !== 0 ? {data: merged} : {error: 'error'};
       },
       providesTags: ['Pokemons'],
     }),
