@@ -49,17 +49,22 @@ type SliceState = {
   list: [] | WishesData;
 };
 
-export const getUserWishes = createAsyncThunk<WishesData, {}, AsyncThunkConfig>(
-  'wishes/get',
-  async ({}, thunkAPI) => {
-    const req = '/wish';
-    try {
-      return (await axios.get(req)) as WishesData;
-    } catch (e: any) {
-      return thunkAPI.rejectWithValue({error: e.message} as MyKnownError);
-    }
-  },
-);
+type QueryParam = {
+  name: string;
+};
+
+export const getUserWishes = createAsyncThunk<
+  WishesData,
+  QueryParam,
+  AsyncThunkConfig
+>('wishes/get', async (query, thunkAPI) => {
+  const req = `/wish?name=${query.name}`;
+  try {
+    return (await axios.get(req)) as WishesData;
+  } catch (e: any) {
+    return thunkAPI.rejectWithValue({error: e.message} as MyKnownError);
+  }
+});
 
 export const addPokemonToWishes = createAsyncThunk<
   Wish,

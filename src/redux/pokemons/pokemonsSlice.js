@@ -1,4 +1,7 @@
 import {apiSlice} from '../api/apiSlice';
+import {createEntityAdapter} from '@reduxjs/toolkit';
+
+const pokemonAdapter = createEntityAdapter({});
 
 export const extendedPokemonSlice = apiSlice.injectEndpoints({
   endpoints: build => ({
@@ -26,12 +29,8 @@ export const extendedPokemonSlice = apiSlice.injectEndpoints({
         );
 
         const merged = [].concat(...results);
-
         return merged.length !== 0 ? {data: merged} : {error: 'error'};
       },
-      transformResponse(baseQueryReturnValue, meta, arg) {
-        console.log('yayyahddnjjsdhkjkjsd');
-      }
     }),
   }),
 });

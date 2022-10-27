@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
+import {SafeAreaView, View, Text, ActivityIndicator} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useGetPokemonQuery} from '../../redux/pokemons/pokemonsSlice';
@@ -13,18 +13,17 @@ import ArrowBackBlack from '../../assets/icons/arrow-back-black.svg';
 // @ts-ignore
 import List from '../../assets/icons/list.svg';
 import styles from './styles';
+import {colors} from '../../constants/colors';
 
 const Home: React.FC<{
   navigation: RootStackProps['navigation'];
 }> = ({navigation}) => {
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(20);
-  const [pokemonData, setPokemonData] = useState([]);
 
   const req = {
     offset,
     limit,
-    pokemonData,
   };
   const useAppDispatch: () => AppDispatch = useDispatch;
   const dispatch = useAppDispatch();
@@ -40,13 +39,6 @@ const Home: React.FC<{
         dispatch(getUserWishes({}));
       }
     })();
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setOffset(offset + 20);
-      setLimit(limit + 20);
-    }, 5000);
   }, []);
 
   const ListHeaderComponent = () => {
@@ -69,6 +61,14 @@ const Home: React.FC<{
     );
   };
 
+  const ListEmptyComponent = () => {
+    return (
+      <View>
+        <Text>No Pokemon yet</Text>
+      </View>
+    );
+  };
+
   const loadMorePokemon = () => {
     if (!isLoading && !isFetching && !isError) {
     }
@@ -77,14 +77,18 @@ const Home: React.FC<{
   return (
     <SafeAreaView style={styles.safeArea}>
       <View>
-        {!isError && !isFetching && !isLoading ? (
-          <PokemonList
-            data={data}
-            columns={2}
-            loadMorePokemon={loadMorePokemon}
-            navigation={navigation}
-            ListHeaderComponent={ListHeaderComponent}
-          />
+        <PokemonList
+          data={data || []}
+          columns={2}
+          loadMorePokemon={loadMorePokemon}
+          navigation={navigation}
+          ListEmptyComponent={ListEmptyComponent}
+          ListHeaderComponent={ListHeaderComponent}
+        />
+        {isLoading || isFetching ? (
+          <View>
+            <ActivityIndicator color={colors.PURPLE} size="small" />
+          </View>
         ) : null}
       </View>
     </SafeAreaView>

@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {TouchableOpacity, VirtualizedList, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {determinePokemonColor} from '../../../utils/utils';
@@ -7,7 +7,12 @@ import styles from './style';
 
 const hitSlop = {left: 20, right: 20, top: 10, bottom: 10};
 
-const WishList = ({data, navigation, ListHeaderComponent}) => {
+const WishList = ({
+  data,
+  navigation,
+  ListHeaderComponent,
+  ListEmptyComponent,
+}) => {
   const renderItem = ({item, index}) => {
     return (
       <TouchableOpacity
@@ -58,20 +63,19 @@ const WishList = ({data, navigation, ListHeaderComponent}) => {
   const getItem = (d, index) => d[index];
   const keyExtractor = (item, index) => index;
 
-  return useMemo(() => {
-    return (
-      <VirtualizedList
-        renderItem={renderItem}
-        getItem={getItem}
-        getItemCount={getItemCount}
-        keyboardDismissMode="on-drag"
-        keyboardShouldPersistTaps="handled"
-        keyExtractor={keyExtractor}
-        ListHeaderComponent={ListHeaderComponent}
-        data={data}
-      />
-    );
-  }, [data]);
+  return (
+    <VirtualizedList
+      renderItem={renderItem}
+      getItem={getItem}
+      getItemCount={getItemCount}
+      keyboardDismissMode="on-drag"
+      keyboardShouldPersistTaps="handled"
+      keyExtractor={keyExtractor}
+      ListEmptyComponent={ListEmptyComponent}
+      ListHeaderComponent={ListHeaderComponent}
+      data={data}
+    />
+  );
 };
 
 export default WishList;

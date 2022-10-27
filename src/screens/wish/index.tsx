@@ -1,5 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, View, Text, TextInput} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  TextInput,
+  ActivityIndicator,
+} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import {RootStackProps} from '../../navigators/types';
@@ -7,11 +13,12 @@ import WishList from '../../components/lists/wish';
 import {RootState, AppDispatch} from '../../redux';
 import {getUserWishes} from '../../redux/wish/wishSlice';
 import styles from './styles';
+import {colors} from '../../constants/colors';
 
 const Wish: React.FC<{
   navigation: RootStackProps['navigation'];
 }> = ({navigation}) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState<string>('');
   const {loading, list} = useSelector((state: RootState) => state.wish);
   const useAppDispatch: () => AppDispatch = useDispatch;
   const dispatch = useAppDispatch();
@@ -19,9 +26,14 @@ const Wish: React.FC<{
 
   useEffect(() => {
     if (focused && !loading && list.length === 0) {
-      dispatch(getUserWishes({}));
+      dispatch(getUserWishes({name: ''}));
     }
   }, [focused]);
+
+  const handleChange = (text: string) => {
+    setValue(text);
+    dispatch(getUserWishes({name: text}));
+  };
 
   const ListHeaderComponent = () => {
     return (
@@ -37,24 +49,36 @@ const Wish: React.FC<{
         <Text style={styles.content}>
           Search for Pokémon by name or by using the National Pokédex number.
         </Text>
-        <TextInput
-          style={styles.input}
-          defaultValue={value}
-          placeholder="What Pokémon are you looking for?"
-          onChangeText={text => setValue(text)}
-        />
+      </View>
+    );
+  };
+  const ListEmptyComponent = () => {
+    return (
+      <View>
+        <Text>No Pokemon added to wish list</Text>
       </View>
     );
   };
 
   return (
     <SafeAreaView>
-      {!loading ? (
-        <WishList
-          data={list}
-          navigation={navigation}
-          ListHeaderComponent={ListHeaderComponent}
-        />
+      <TextInput
+        style={styles.input}
+        placeholderTextColor={colors.BLACK}
+        value={value}
+        placeholder="What Pokémon are you looking for?"
+        onChangeText={handleChange}
+      />
+      <WishList
+        data={list}
+        navigation={navigation}
+        ListEmptyComponent={ListEmptyComponent}
+        ListHeaderComponent={ListHeaderComponent}
+      />
+      {loading ? (
+        <View style={styles.indicator}>
+          <ActivityIndicator color={colors.PURPLE} size="small" />
+        </View>
       ) : null}
     </SafeAreaView>
   );

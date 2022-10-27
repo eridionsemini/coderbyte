@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  SafeAreaView,
+} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateUser} from '../../redux/user/userSlice';
 import {isValidEmail} from '../../utils/utils';
@@ -61,7 +67,7 @@ const EditProfile: React.FC<{
   };
 
   return (
-    <View>
+    <SafeAreaView>
       <View style={styles.navigationBar}>
         <TouchableOpacity hitSlop={hitSlop} onPress={() => navigation.goBack()}>
           <ArrowBack />
@@ -115,7 +121,7 @@ const EditProfile: React.FC<{
         />
         {!validLastname ? <Text style={styles.error}>{error}</Text> : null}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

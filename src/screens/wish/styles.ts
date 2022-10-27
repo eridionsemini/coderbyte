@@ -5,6 +5,7 @@ import {colors} from '../../constants/colors';
 const styles = StyleSheet.create({
   listHeader: {
     marginBottom: 24,
+    marginTop: 20,
   },
   mainHalfCircle: {
     width: '100%',
@@ -53,15 +54,21 @@ const styles = StyleSheet.create({
     left: 20,
   },
   input: {
-    width: wp('100%') - 16,
-    marginHorizontal: 8,
+    width: wp('100%'),
     height: 48,
     backgroundColor: colors.DARK_GREY,
-    borderRadius: 24,
-    marginTop: -16,
     zIndex: 99,
     color: colors.BLACK,
     paddingHorizontal: 12,
+    position: 'absolute',
+    top: 40,
+  },
+  indicator: {
+    paddingVertical: 15,
+    backgroundColor: colors.WHITE,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
