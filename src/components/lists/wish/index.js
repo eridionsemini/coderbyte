@@ -9,7 +9,6 @@ const hitSlop = {left: 20, right: 20, top: 10, bottom: 10};
 
 const WishList = ({data, navigation, ListHeaderComponent}) => {
   const renderItem = ({item, index}) => {
-    console.log('item',item);
     return (
       <TouchableOpacity
         key={index}
@@ -19,9 +18,7 @@ const WishList = ({data, navigation, ListHeaderComponent}) => {
         style={[
           styles.pokemonContainer,
           {
-            backgroundColor: determinePokemonColor(
-              item.types[0].type.name,
-            ),
+            backgroundColor: determinePokemonColor(item.types[0].type.name),
           },
         ]}>
         <View style={styles.info}>
@@ -44,9 +41,7 @@ const WishList = ({data, navigation, ListHeaderComponent}) => {
             style={[
               styles.innerCircle,
               {
-                backgroundColor: determinePokemonColor(
-                  item.types[0].type.name,
-                ),
+                backgroundColor: determinePokemonColor(item.types[0].type.name),
               },
             ]}
           />

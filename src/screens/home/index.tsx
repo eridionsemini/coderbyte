@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView, View, Text} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useGetPokemonQuery} from '../../redux/pokemons/pokemonsSlice';
+import {getCurrentUser} from '../../redux/user/userSlice';
+import {getUserWishes} from '../../redux/wish/wishSlice';
 import {RootStackProps} from '../../navigators/types';
 import {RootState, AppDispatch} from '../../redux';
 import PokemonList from '../../components/lists/pokemon';
@@ -10,18 +13,18 @@ import ArrowBackBlack from '../../assets/icons/arrow-back-black.svg';
 // @ts-ignore
 import List from '../../assets/icons/list.svg';
 import styles from './styles';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {getCurrentUser} from '../../redux/user/userSlice';
 
 const Home: React.FC<{
   navigation: RootStackProps['navigation'];
 }> = ({navigation}) => {
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(20);
+  const [pokemonData, setPokemonData] = useState([]);
 
   const req = {
     offset,
     limit,
+    pokemonData,
   };
   const useAppDispatch: () => AppDispatch = useDispatch;
   const dispatch = useAppDispatch();
@@ -34,8 +37,16 @@ const Home: React.FC<{
       const token = await AsyncStorage.getItem('token');
       if (token && !user) {
         dispatch(getCurrentUser({}));
+        dispatch(getUserWishes({}));
       }
     })();
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setOffset(offset + 20);
+      setLimit(limit + 20);
+    }, 5000);
   }, []);
 
   const ListHeaderComponent = () => {
@@ -58,6 +69,11 @@ const Home: React.FC<{
     );
   };
 
+  const loadMorePokemon = () => {
+    if (!isLoading && !isFetching && !isError) {
+    }
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View>
@@ -65,6 +81,7 @@ const Home: React.FC<{
           <PokemonList
             data={data}
             columns={2}
+            loadMorePokemon={loadMorePokemon}
             navigation={navigation}
             ListHeaderComponent={ListHeaderComponent}
           />

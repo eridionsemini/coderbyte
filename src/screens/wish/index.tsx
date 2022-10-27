@@ -23,8 +23,6 @@ const Wish: React.FC<{
     }
   }, [focused]);
 
-  console.log('list', list);
-
   const ListHeaderComponent = () => {
     return (
       <View style={styles.listHeader}>

@@ -80,8 +80,6 @@ const PokemonDetail = ({
     return null;
   }
 
-  console.log('details', pokemon);
-
   return (
     <SafeAreaView>
       <StatusBar hidden />

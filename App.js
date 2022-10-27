@@ -4,9 +4,9 @@ import {LogBox} from 'react-native';
 import 'react-native-gesture-handler';
 import store from './src/redux';
 import RootNavigator from './src/navigators/rootNavigator';
-LogBox.ignoreLogs([]);
+LogBox.ignoreAllLogs();
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <Provider store={store}>
       <RootNavigator />

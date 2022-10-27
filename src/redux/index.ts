@@ -21,7 +21,6 @@ const appReducer = (state: any, action: any) => {
   return rootReducer(state, action);
 };
 
-
 const store = configureStore({
   reducer: appReducer,
   middleware: getDefaultMiddleware =>

@@ -3,7 +3,13 @@ import {VirtualizedList, View} from 'react-native';
 import Pokemon from '../../../components/pokemon';
 import styles from './styles';
 
-const PokemonList = ({data, columns, navigation, ListHeaderComponent}) => {
+const PokemonList = ({
+  data,
+  columns,
+  navigation,
+  ListHeaderComponent,
+  loadMorePokemon,
+}) => {
   const getItem = (d, index) => {
     let items = [];
     for (let i = 0; i < columns; i++) {
@@ -42,6 +48,8 @@ const PokemonList = ({data, columns, navigation, ListHeaderComponent}) => {
       keyExtractor={keyExtractor}
       getItemCount={getItemCount}
       data={data}
+      onEndReachedThreshold={1}
+      onEndReached={({distanceFromEnd}) => loadMorePokemon()}
       ListHeaderComponent={ListHeaderComponent}
       showsVerticalScrollIndicator={false}
       renderItem={renderItem}
