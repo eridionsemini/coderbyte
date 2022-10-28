@@ -22,7 +22,7 @@ type Indices = {
   };
 };
 
-type PokemonDetail = {
+export type PokemonDetail = {
   abilities: Array<Ability>;
   base_experience: number;
   forms: Array<Form>;

@@ -115,7 +115,9 @@ export const logout = createAsyncThunk<boolean, {}, AsyncThunkConfig>(
   async () => {
     const req = '/auth/logout';
     try {
-      return await axios.post(req);
+      await axios.post(req);
+      await AsyncStorage.removeItem('token');
+      return true;
     } catch (e) {
       return false;
     }

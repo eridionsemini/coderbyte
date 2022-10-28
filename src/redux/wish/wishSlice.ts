@@ -33,7 +33,7 @@ type NewWishAttributes = {
 
 type WishesData = [] | Wish[];
 
-type Wish = {
+export type Wish = {
   pokemonId: number;
   name: string;
   image: string;

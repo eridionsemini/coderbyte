@@ -1,19 +1,27 @@
 import React from 'react';
 import {TouchableOpacity, VirtualizedList, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {Wish} from '../../../redux/wish/wishSlice';
+import {RootStackProps} from '../../../navigators/types';
 import {determinePokemonColor} from '../../../utils/utils';
+// @ts-ignore
 import HeartRed from '../../../assets/icons/heart-red.svg';
 import styles from './style';
 
 const hitSlop = {left: 20, right: 20, top: 10, bottom: 10};
 
-const WishList = ({
-  data,
-  navigation,
-  ListHeaderComponent,
-  ListEmptyComponent,
-}) => {
-  const renderItem = ({item, index}) => {
+type MapElement = {
+  item: Wish;
+  index: number;
+};
+
+const WishList: React.FC<{
+  data: Array<Wish>;
+  navigation: RootStackProps['navigation'];
+  ListHeaderComponent: () => JSX.Element;
+  ListEmptyComponent: () => JSX.Element;
+}> = ({data, navigation, ListHeaderComponent, ListEmptyComponent}) => {
+  const renderItem = ({item, index}: MapElement) => {
     return (
       <TouchableOpacity
         key={index}
@@ -26,7 +34,7 @@ const WishList = ({
             backgroundColor: determinePokemonColor(item.types[0].type.name),
           },
         ]}>
-        <View style={styles.info}>
+        <View>
           <Text style={styles.id}># {item.pokemonId}</Text>
           <Text style={styles.name}>{item.name}</Text>
           <View style={styles.types}>
@@ -60,8 +68,8 @@ const WishList = ({
   };
 
   const getItemCount = () => data.length;
-  const getItem = (d, index) => d[index];
-  const keyExtractor = (item, index) => index;
+  const getItem = (d: Array<Wish>, index: number) => d[index];
+  const keyExtractor = (item: Wish, index: number) => index.toString();
 
   return (
     <VirtualizedList
