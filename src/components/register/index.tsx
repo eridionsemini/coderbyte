@@ -104,6 +104,7 @@ const Register: React.FC<{
         style={validPassword ? styles.input : styles.inputError}
         value={password}
         ref={passwordRef}
+        secureTextEntry
         returnKeyType="go"
         onSubmitEditing={submit}
         placeholder="Password"

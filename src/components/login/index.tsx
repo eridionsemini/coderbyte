@@ -50,6 +50,7 @@ const Login: React.FC<{
         style={validPassword ? styles.input : styles.inputError}
         value={password}
         ref={passwordRef}
+        secureTextEntry
         placeholder="Password"
         returnKeyType="go"
         onSubmitEditing={submit}

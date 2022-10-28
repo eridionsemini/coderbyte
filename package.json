@@ -30,6 +30,7 @@
     "react-native-screens": "^3.18.2",
     "react-native-svg": "^13.4.0",
     "react-native-svg-transformer": "^1.0.0",
+    "react-native-toast-notifications": "^3.3.1",
     "react-redux": "^8.0.4",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0"

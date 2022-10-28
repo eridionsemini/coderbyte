@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice, Dispatch} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from '../instance';
+import {getUserWishes} from '../wish/wishSlice';
 
 type AsyncThunkConfig = {
   state?: unknown;
@@ -83,8 +84,10 @@ export const login = createAsyncThunk<
   try {
     const res = (await axios.post(req, body)) as LoginData;
     await AsyncStorage.setItem('token', res.access_token);
+    await thunkAPI.dispatch(getUserWishes({name: ''}));
     return res;
   } catch (e: any) {
+    toast.show(e.response.data.message, {type: 'danger'});
     console.log('error from login', e);
     return thunkAPI.rejectWithValue({error: e.mesaage} as MyKnownError);
   }
@@ -104,8 +107,12 @@ export const register = createAsyncThunk<
     lastname,
   };
   try {
-    return (await axios.post(req, body)) as RegisterData;
+    const res = (await axios.post(req, body)) as RegisterData;
+    await AsyncStorage.setItem('token', res.access_token);
+    toast.show(`Welcome to Pokedex ${firstname} `, {type: 'success'});
+    return res;
   } catch (e: any) {
+    toast.show('Error during registration', {type: 'danger'});
     return thunkAPI.rejectWithValue({error: e.message} as MyKnownError);
   }
 });
@@ -150,6 +157,7 @@ export const updateUser = createAsyncThunk<
     lastname,
   };
   try {
+    toast.show('User updated', {type: 'success'});
     return (await axios.put(req, body)) as User;
   } catch (e: any) {
     return thunkAPI.rejectWithValue({error: e.message} as MyKnownError);

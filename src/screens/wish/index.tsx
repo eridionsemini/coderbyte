@@ -56,8 +56,8 @@ const Wish: React.FC<{
   };
   const ListEmptyComponent = () => {
     return (
-      <View>
-        <Text>No Pokemon added to wish list</Text>
+      <View style={styles.emptyList}>
+        <Text>No Pokemon added</Text>
       </View>
     );
   };

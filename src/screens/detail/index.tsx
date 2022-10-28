@@ -44,6 +44,7 @@ const PokemonDetail = ({
   const useAppDispatch: () => AppDispatch = useDispatch;
   const dispatch = useAppDispatch();
   const {list} = useSelector((state: RootState) => state.wish);
+  const {user} = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     const backAction = () => {
@@ -97,7 +98,7 @@ const PokemonDetail = ({
           <TouchableOpacity
             hitSlop={hitSlop}
             onPress={() => handleHeartPress(pokemon)}>
-            {determineIfPokemonIsInWishes(list, pokemon.id) ? (
+            {!user ? null : determineIfPokemonIsInWishes(list, pokemon.id) ? (
               <HeartRed />
             ) : (
               <HeartWhite />

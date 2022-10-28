@@ -29,6 +29,15 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
+  close: {
+    alignSelf: 'flex-end',
+    height: 34,
+    width: 34,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 17,
+    backgroundColor: colors.LIGHT_GREY,
+  },
 });
 
 export default styles;

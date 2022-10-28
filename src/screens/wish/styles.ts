@@ -70,6 +70,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  emptyList: {
+    alignSelf: 'center',
+    marginTop: 20,
+    color: colors.BLACK,
+  },
 });
 
 export default styles;

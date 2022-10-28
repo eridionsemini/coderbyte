@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {View, Modal, TouchableOpacity} from 'react-native';
 import styles from './styles';
 
+// @ts-ignore
+import Close from '../../assets/icons/close.svg';
+
 export interface IModal {
   close(): void;
   open(): void;
@@ -60,7 +63,12 @@ class AuthModal extends Component<Props, State> implements IModal {
         onRequestClose={this.close}>
         <View style={styles.outsideContainer}>
           {this.renderOutsideTouchable(outTouch)}
-          <View style={styles.container}>{children}</View>
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.close} onPress={() => this.close()}>
+              <Close />
+            </TouchableOpacity>
+            {children}
+          </View>
         </View>
       </Modal>
     );

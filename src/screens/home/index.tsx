@@ -46,9 +46,9 @@ const Home: React.FC<{
     })();
   }, []);
 
-
   useEffect(() => {
     if (isSuccess && focused) {
+      // @ts-ignore
       dataRef.current.value = data;
     }
   }, [isSuccess]);
@@ -78,7 +78,6 @@ const Home: React.FC<{
       setOffset(offset + limit);
     }
   };
-  console.log('data',data);
 
   return (
     <SafeAreaView style={styles.safeArea}>
