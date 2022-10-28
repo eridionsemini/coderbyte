@@ -9,6 +9,11 @@ import HomeSelected from '../../assets/icons/home-selected.svg';
 import Wish from '../../assets/icons/wish.svg';
 // @ts-ignore
 import WishSelected from '../../assets/icons/wish-selected';
+// @ts-ignore
+import Profile from '../../assets/icons/profile.svg';
+// @ts-ignore
+import ProfileSelected from '../../assets/icons/profile-selected.svg';
+
 import styles from './styles';
 
 const TabBar: React.FC<{
@@ -30,9 +35,9 @@ const TabBar: React.FC<{
         return <Wish />;
       case 2:
         if (focused) {
-          return <HomeSelected />;
+          return <ProfileSelected />;
         }
-        return <Home />;
+        return <Profile />;
 
       default:
         return null;

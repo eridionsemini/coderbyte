@@ -1,8 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
 import {colors} from '../../constants/colors';
 
 const styles = StyleSheet.create({
@@ -11,7 +7,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:200
+    marginTop: 200,
   },
   container: {
     alignItems: 'center',
@@ -30,10 +26,17 @@ const styles = StyleSheet.create({
   },
   loginWrapper: {
     marginTop: 20,
+    backgroundColor: colors.BLACK,
+    height: 40,
+    width: 120,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   login: {
-    color: colors.BLACK,
-    fontSize: 20,
+    color: colors.WHITE,
+    fontSize: 16,
+    lineHeight: 20,
   },
 });
 

@@ -39,7 +39,7 @@ const Login: React.FC<{
         ref={emailRef}
         returnKeyType="next"
         onSubmitEditing={() => passwordRef.current?.focus()}
-        placeholder="email"
+        placeholder="Email"
         onChangeText={text => {
           setEmail(text);
           setValidEmail(true);
@@ -50,7 +50,7 @@ const Login: React.FC<{
         style={validPassword ? styles.input : styles.inputError}
         value={password}
         ref={passwordRef}
-        placeholder="password"
+        placeholder="Password"
         returnKeyType="go"
         onSubmitEditing={submit}
         onChangeText={text => {

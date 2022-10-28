@@ -28,7 +28,7 @@ const Profile: React.FC<{
         {!user ? (
           <Auth
             title="Seems that you are logged out"
-            description="Please login or register to enjoy the full features of or app"
+            description="Please login or register to enjoy the full features of the app"
           />
         ) : (
           <View style={styles.profileContainer}>

@@ -12,6 +12,7 @@ import {RootStackProps} from '../../navigators/types';
 import WishList from '../../components/lists/wish';
 import {RootState, AppDispatch} from '../../redux';
 import {getUserWishes} from '../../redux/wish/wishSlice';
+import Auth from '../../components/auth';
 import styles from './styles';
 import {colors} from '../../constants/colors';
 
@@ -20,12 +21,13 @@ const Wish: React.FC<{
 }> = ({navigation}) => {
   const [value, setValue] = useState<string>('');
   const {loading, list} = useSelector((state: RootState) => state.wish);
+  const {user} = useSelector((state: RootState) => state.user);
   const useAppDispatch: () => AppDispatch = useDispatch;
   const dispatch = useAppDispatch();
   const focused = useIsFocused();
 
   useEffect(() => {
-    if (focused && !loading && list.length === 0) {
+    if (focused && !loading && user && list.length === 0) {
       dispatch(getUserWishes({name: ''}));
     }
   }, [focused]);
@@ -62,24 +64,33 @@ const Wish: React.FC<{
 
   return (
     <SafeAreaView>
-      <TextInput
-        style={styles.input}
-        placeholderTextColor={colors.BLACK}
-        value={value}
-        placeholder="What Pokémon are you looking for?"
-        onChangeText={handleChange}
-      />
-      <WishList
-        data={list}
-        navigation={navigation}
-        ListEmptyComponent={ListEmptyComponent}
-        ListHeaderComponent={ListHeaderComponent}
-      />
-      {loading ? (
-        <View style={styles.indicator}>
-          <ActivityIndicator color={colors.PURPLE} size="small" />
-        </View>
-      ) : null}
+      {!user ? (
+        <Auth
+          title="Seems that you are logged out"
+          description="Please login or register to see or add pokemon to wishes"
+        />
+      ) : (
+        <>
+          <TextInput
+            style={styles.input}
+            placeholderTextColor={colors.BLACK}
+            value={value}
+            placeholder="What Pokémon are you looking for?"
+            onChangeText={handleChange}
+          />
+          <WishList
+            data={list}
+            navigation={navigation}
+            ListEmptyComponent={ListEmptyComponent}
+            ListHeaderComponent={ListHeaderComponent}
+          />
+          {loading ? (
+            <View style={styles.indicator}>
+              <ActivityIndicator color={colors.PURPLE} size="small" />
+            </View>
+          ) : null}
+        </>
+      )}
     </SafeAreaView>
   );
 };

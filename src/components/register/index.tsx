@@ -67,7 +67,7 @@ const Register: React.FC<{
         ref={emailRef}
         returnKeyType="next"
         onSubmitEditing={() => firstnameRef.current?.focus()}
-        placeholder="email"
+        placeholder="Email"
         onChangeText={text => {
           setEmail(text);
           setValidMail(true);
@@ -80,7 +80,7 @@ const Register: React.FC<{
         ref={firstnameRef}
         returnKeyType="next"
         onSubmitEditing={() => lastnameRef.current?.focus()}
-        placeholder="firstname"
+        placeholder="Firstname"
         onChangeText={text => {
           setFirstname(text);
           setValidFirstname(true);
@@ -93,7 +93,7 @@ const Register: React.FC<{
         ref={lastnameRef}
         returnKeyType="next"
         onSubmitEditing={() => passwordRef.current?.focus()}
-        placeholder="lastname"
+        placeholder="Lastname"
         onChangeText={text => {
           setLastname(text);
           setValidLastname(true);
@@ -106,7 +106,7 @@ const Register: React.FC<{
         ref={passwordRef}
         returnKeyType="go"
         onSubmitEditing={submit}
-        placeholder="password"
+        placeholder="Password"
         onChangeText={text => {
           setPassword(text);
           setValidPassword(true);

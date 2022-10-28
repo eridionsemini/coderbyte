@@ -1,21 +1,21 @@
 import {apiSlice} from '../api/apiSlice';
-import {createEntityAdapter} from '@reduxjs/toolkit';
 
-const pokemonAdapter = createEntityAdapter({});
 
 export const extendedPokemonSlice = apiSlice.injectEndpoints({
   endpoints: build => ({
     getPokemon: build.query({
       async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
         /// fetch initial Pokemons
-        const {limit, offset} = _arg;
-        const data = await fetchWithBQ(`?offset=${offset}&limit=${limit}`);
+        console.log('arguments', _arg);
+        const data = await fetchWithBQ(
+          `?offset=${_arg.offset}&limit=${_arg.limit}`,
+        );
         if (data.error) {
           return {error: data.error};
         }
-        const pokemons = data.data;
+        const initial = data.data;
         const results = await Promise.all(
-          pokemons.results.map(async i => {
+          initial.results.map(async i => {
             const detail = await fetchWithBQ(i.url);
             return {
               ...i,
@@ -28,7 +28,7 @@ export const extendedPokemonSlice = apiSlice.injectEndpoints({
           }),
         );
 
-        const merged = [].concat(...results);
+        const merged = _arg.pokemonData.concat(...results);
         return merged.length !== 0 ? {data: merged} : {error: 'error'};
       },
     }),

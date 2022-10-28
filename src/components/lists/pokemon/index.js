@@ -8,7 +8,6 @@ const PokemonList = ({
   columns,
   navigation,
   ListHeaderComponent,
-  ListEmptyComponent,
   loadMorePokemon,
 }) => {
   const getItem = (d, index) => {
@@ -53,7 +52,6 @@ const PokemonList = ({
       onEndReached={({distanceFromEnd}) => loadMorePokemon()}
       ListHeaderComponent={ListHeaderComponent}
       showsVerticalScrollIndicator={false}
-      ListEmptyComponent={ListEmptyComponent}
       renderItem={renderItem}
     />
   );

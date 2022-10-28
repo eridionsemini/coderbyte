@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {colors} from '../../constants/colors';
 
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     color: colors.BLACK,
     paddingHorizontal: 12,
     position: 'absolute',
-    top: 40,
+    top: Platform.OS === 'ios' ? 40 : 0,
   },
   indicator: {
     paddingVertical: 15,

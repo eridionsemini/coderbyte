@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   backLogin: {
-    marginTop: 20,
+    marginTop: 10,
   },
   backLoginText: {
     color: colors.BLACK,

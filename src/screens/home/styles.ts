@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     width: wp('100%') - 16,
     marginHorizontal: 8,
     alignItems: 'center',
+    position: 'relative',
   },
   headerWrapper: {
     flexDirection: 'row',
@@ -69,6 +70,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 45,
     backgroundColor: colors.WHITE,
+  },
+  endIcon: {
+    position: 'absolute',
+    bottom: 30,
+    right: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    zIndex: 999,
+    backgroundColor: colors.PURPLE,
+  },
+  image: {
+    height: 24,
+    width: 24,
   },
 });
 
