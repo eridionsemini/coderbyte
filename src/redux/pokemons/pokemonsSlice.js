@@ -1,12 +1,10 @@
 import {apiSlice} from '../api/apiSlice';
 
-
 export const extendedPokemonSlice = apiSlice.injectEndpoints({
   endpoints: build => ({
     getPokemon: build.query({
       async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
         /// fetch initial Pokemons
-        console.log('arguments', _arg);
         const data = await fetchWithBQ(
           `?offset=${_arg.offset}&limit=${_arg.limit}`,
         );

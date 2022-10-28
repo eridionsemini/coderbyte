@@ -1,6 +1,5 @@
 import React from 'react';
 import {TouchableOpacity, Text, View} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
 import FastImage from 'react-native-fast-image';
 import {PokemonTypes} from './types';
 import {RootStackProps} from '../../navigators/types';
@@ -14,7 +13,6 @@ const Pokemon: React.FC<{
   types: Array<PokemonTypes>;
   navigation: RootStackProps['navigation'];
 }> = ({name, id, image, types, navigation}) => {
-
   const handlePokemonPress = (pokemonId: number) => {
     navigation.navigate('PokemonDetail', {id: pokemonId});
   };

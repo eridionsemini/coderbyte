@@ -76,7 +76,7 @@ const PokemonDetail = ({
     }
   };
 
-  if (isFetching || isLoading) {
+  if (isFetching || isLoading || !pokemon) {
     return null;
   }
 

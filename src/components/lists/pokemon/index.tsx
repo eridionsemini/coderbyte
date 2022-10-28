@@ -1,16 +1,28 @@
 import React from 'react';
 import {VirtualizedList, View} from 'react-native';
 import Pokemon from '../../../components/pokemon';
+import {RootStackProps} from '../../../navigators/types';
+import {PokemonTypes} from '../../pokemon/types';
 import styles from './styles';
 
-const PokemonList = ({
-  data,
-  columns,
-  navigation,
-  ListHeaderComponent,
-  loadMorePokemon,
-}) => {
-  const getItem = (d, index) => {
+type Pokemon = {
+  name: string;
+  url: string;
+  detail: {
+    image: string;
+    id: number;
+    types: Array<PokemonTypes>;
+  };
+};
+
+const PokemonList: React.FC<{
+  data: Array<Pokemon>;
+  columns: number;
+  ListHeaderComponent: () => JSX.Element | null;
+  loadMorePokemon: () => void;
+  navigation: RootStackProps['navigation'];
+}> = ({data, columns, navigation, ListHeaderComponent, loadMorePokemon}) => {
+  const getItem = (d: Array<Pokemon>, index: number) => {
     let items = [];
     for (let i = 0; i < columns; i++) {
       const item = d[index * columns + i];
@@ -18,15 +30,15 @@ const PokemonList = ({
     }
     return items;
   };
-  const keyExtractor = ([item], key) => key.toString();
+  const keyExtractor = ([]: Array<Pokemon>, key: number) => key.toString();
   const getItemCount = () => data.length;
-  const renderItem = ({item}) => <Item row={item} />;
+  const renderItem = ({item}: any) => <Item row={item} />;
 
-  const Item = ({row}) => {
-    const key = Math.random() * Math.random().toString();
+  const Item = ({row}: any) => {
+    const key = Math.random() * Math.random();
     return (
       <View key={key} style={styles.row}>
-        {row.map((pokemon, idx) => {
+        {row.map((pokemon: Pokemon, idx: number) => {
           return (
             <Pokemon
               key={idx}
@@ -49,7 +61,7 @@ const PokemonList = ({
       getItemCount={getItemCount}
       data={data}
       onEndReachedThreshold={1}
-      onEndReached={({distanceFromEnd}) => loadMorePokemon()}
+      onEndReached={() => loadMorePokemon()}
       ListHeaderComponent={ListHeaderComponent}
       showsVerticalScrollIndicator={false}
       renderItem={renderItem}

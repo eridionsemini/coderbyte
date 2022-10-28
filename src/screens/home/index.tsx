@@ -78,6 +78,7 @@ const Home: React.FC<{
       setOffset(offset + limit);
     }
   };
+  console.log('data',data);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -88,7 +89,7 @@ const Home: React.FC<{
           loadMorePokemon={loadMorePokemon}
           navigation={navigation}
           ListHeaderComponent={
-            isFetching || isLoading ? null : ListHeaderComponent
+            isFetching || isLoading ? () => null : ListHeaderComponent
           }
         />
         {isLoading || isFetching ? (
