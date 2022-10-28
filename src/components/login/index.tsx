@@ -37,6 +37,7 @@ const Login: React.FC<{
         style={validEmail ? styles.input : styles.inputError}
         value={email}
         ref={emailRef}
+        underlineColorAndroid="transparent"
         returnKeyType="next"
         onSubmitEditing={() => passwordRef.current?.focus()}
         placeholder="Email"
@@ -50,6 +51,7 @@ const Login: React.FC<{
         style={validPassword ? styles.input : styles.inputError}
         value={password}
         ref={passwordRef}
+        underlineColorAndroid="transparent"
         secureTextEntry
         placeholder="Password"
         returnKeyType="go"

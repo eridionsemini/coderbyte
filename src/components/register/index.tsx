@@ -65,6 +65,7 @@ const Register: React.FC<{
         style={validMail ? styles.input : styles.inputError}
         value={email}
         ref={emailRef}
+        underlineColorAndroid="transparent"
         returnKeyType="next"
         onSubmitEditing={() => firstnameRef.current?.focus()}
         placeholder="Email"
@@ -77,6 +78,7 @@ const Register: React.FC<{
       <TextInput
         style={validFirstname ? styles.input : styles.inputError}
         value={firstname}
+        underlineColorAndroid="transparent"
         ref={firstnameRef}
         returnKeyType="next"
         onSubmitEditing={() => lastnameRef.current?.focus()}
@@ -91,6 +93,7 @@ const Register: React.FC<{
         style={validLastname ? styles.input : styles.inputError}
         value={lastname}
         ref={lastnameRef}
+        underlineColorAndroid="transparent"
         returnKeyType="next"
         onSubmitEditing={() => passwordRef.current?.focus()}
         placeholder="Lastname"
@@ -105,6 +108,7 @@ const Register: React.FC<{
         value={password}
         ref={passwordRef}
         secureTextEntry
+        underlineColorAndroid="transparent"
         returnKeyType="go"
         onSubmitEditing={submit}
         placeholder="Password"

@@ -75,6 +75,7 @@ const Wish: React.FC<{
             style={styles.input}
             placeholderTextColor={colors.BLACK}
             value={value}
+            underlineColorAndroid="transparent"
             placeholder="What Pokémon are you looking for?"
             onChangeText={handleChange}
           />
