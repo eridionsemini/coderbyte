@@ -15,6 +15,10 @@ type Pokemon = {
   };
 };
 
+type MapItem = {
+  item: Array<Pokemon>;
+};
+
 const PokemonList: React.FC<{
   data: Array<Pokemon>;
   columns: number;
@@ -32,13 +36,13 @@ const PokemonList: React.FC<{
   };
   const keyExtractor = ([]: Array<Pokemon>, key: number) => key.toString();
   const getItemCount = () => data.length;
-  const renderItem = ({item}: any) => <Item row={item} />;
+  const renderItem = ({item}: MapItem) => <Item item={item} />;
 
-  const Item = ({row}: any) => {
+  const Item = ({item}: MapItem) => {
     const key = Math.random() * Math.random();
     return (
       <View key={key} style={styles.row}>
-        {row.map((pokemon: Pokemon, idx: number) => {
+        {item.map((pokemon: Pokemon, idx: number) => {
           return (
             <Pokemon
               key={idx}
