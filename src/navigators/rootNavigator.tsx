@@ -3,7 +3,7 @@ import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import UserTabNavi from './userNavigator';
 import PokemonDetail from '../screens/detail';
-import {RootStackParamList, headerOptions} from './types';
+import {RootStackParamList, headerOptions, navigationRef} from './types';
 import {colors} from '../constants/colors';
 
 const theme = {
@@ -46,9 +46,8 @@ const RootStackNavi = () => {
 };
 
 const RootNavigator = () => {
-
   return (
-    <NavigationContainer theme={theme}>
+    <NavigationContainer theme={theme} ref={navigationRef}>
       <RootStackNavi />
     </NavigationContainer>
   );

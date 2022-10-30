@@ -9,10 +9,10 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import {RootStackProps} from '../../navigators/types';
-import WishList from '../../components/lists/wish';
 import {RootState, AppDispatch} from '../../redux';
 import {getUserWishes} from '../../redux/wish/wishSlice';
 import Auth from '../../components/auth';
+import WishList from '../../components/lists/wish';
 import styles from './styles';
 import {colors} from '../../constants/colors';
 

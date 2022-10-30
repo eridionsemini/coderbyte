@@ -1,5 +1,6 @@
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {StackScreenProps} from '@react-navigation/stack';
+import {createNavigationContainerRef} from '@react-navigation/native';
 
 export type BottomTabNaviParams = {
   home: undefined;
@@ -42,3 +43,5 @@ type HeaderOptions = {
 export const headerOptions: HeaderOptions = {
   headerShown: false,
 };
+
+export const navigationRef = createNavigationContainerRef<RootStackParamList>();
