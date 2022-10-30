@@ -7,8 +7,6 @@ import {ProfileStackProps} from '../../navigators/types';
 import Auth from '../../components/auth';
 import {getFirstLetter} from '../../utils/utils';
 import styles from './styles';
-
-// @ts-ignore
 import User from '../../assets/icons/user.svg';
 
 const Profile: React.FC<{

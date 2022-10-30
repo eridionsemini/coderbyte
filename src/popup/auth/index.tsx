@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {View, Modal, TouchableOpacity} from 'react-native';
 import styles from './styles';
-
-// @ts-ignore
 import Close from '../../assets/icons/close.svg';
 
 export interface IModal {

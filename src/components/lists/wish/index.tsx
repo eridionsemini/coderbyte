@@ -4,7 +4,6 @@ import FastImage from 'react-native-fast-image';
 import {Wish} from '../../../redux/wish/wishSlice';
 import {RootStackProps} from '../../../navigators/types';
 import {determinePokemonColor} from '../../../utils/utils';
-// @ts-ignore
 import HeartRed from '../../../assets/icons/heart-red.svg';
 import styles from './style';
 

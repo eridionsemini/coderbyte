@@ -10,9 +10,7 @@ import {getUserWishes} from '../../redux/wish/wishSlice';
 import {RootStackProps} from '../../navigators/types';
 import {RootState, AppDispatch} from '../../redux';
 import PokemonList from '../../components/lists/pokemon';
-// @ts-ignore
 import ArrowBackBlack from '../../assets/icons/arrow-back-black.svg';
-// @ts-ignore
 import List from '../../assets/icons/list.svg';
 import styles from './styles';
 import {colors} from '../../constants/colors';

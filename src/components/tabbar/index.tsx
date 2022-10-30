@@ -1,17 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, View, Text} from 'react-native';
 import {BottomProps} from '../../navigators/types';
-// @ts-ignore
 import Home from '../../assets/icons/home.svg';
-// @ts-ignore
 import HomeSelected from '../../assets/icons/home-selected.svg';
-// @ts-ignore
 import Wish from '../../assets/icons/wish.svg';
-// @ts-ignore
-import WishSelected from '../../assets/icons/wish-selected';
-// @ts-ignore
+import WishSelected from '../../assets/icons/wish-selected.svg';
 import Profile from '../../assets/icons/profile.svg';
-// @ts-ignore
 import ProfileSelected from '../../assets/icons/profile-selected.svg';
 
 import styles from './styles';

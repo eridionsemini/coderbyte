@@ -20,16 +20,12 @@ import {
   calculateTotalStats,
   determineIfPokemonIsInWishes,
 } from '../../utils/utils';
+import ArrowBackWhite from '../../assets/icons/arrow-back-white.svg';
+import HeartWhite from '../../assets/icons/heart-white.svg';
+import HeartRed from '../../assets/icons/heart-red.svg';
+
 import {colors} from '../../constants/colors';
 import styles from './styles';
-
-// @ts-ignore
-import ArrowBackWhite from '../../assets/icons/arrow-back-white.svg';
-// @ts-ignore
-import HeartWhite from '../../assets/icons/heart-white.svg';
-
-// @ts-ignore
-import HeartRed from '../../assets/icons/heart-red.svg';
 
 const hitSlop = {left: 30, right: 30, top: 20, bottom: 20};
 

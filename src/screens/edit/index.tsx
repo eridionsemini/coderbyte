@@ -12,8 +12,6 @@ import {isValidEmail} from '../../utils/utils';
 import {AppDispatch, RootState} from '../../redux';
 import {UserUpdateAttributes} from '../../redux/user/userSlice';
 import {ProfileStackProps} from '../../navigators/types';
-
-// @ts-ignore
 import ArrowBack from '../../assets/icons/arrow-back-black.svg';
 import styles from './styles';
 
