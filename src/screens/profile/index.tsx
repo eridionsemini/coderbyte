@@ -22,36 +22,34 @@ const Profile: React.FC<{
 
   return (
     <SafeAreaView>
-      <View>
-        {!user ? (
-          <Auth
-            title="Seems that you are logged out"
-            description="Please login or register to enjoy the full features of the app"
-          />
-        ) : (
-          <View style={styles.profileContainer}>
-            <View style={styles.imageWrapper}>
-              <User />
-              <Text style={styles.name}>
-                {getFirstLetter(user.firstname)} {getFirstLetter(user.lastname)}
-              </Text>
-            </View>
-            <Text style={styles.userInfo}>
-              {user.firstname} {user.lastname}
+      {!user ? (
+        <Auth
+          title="Seems that you are logged out"
+          description="Please login or register to enjoy the full features of the app"
+        />
+      ) : (
+        <View style={styles.profileContainer}>
+          <View style={styles.imageWrapper}>
+            <User />
+            <Text style={styles.name}>
+              {getFirstLetter(user.firstname)} {getFirstLetter(user.lastname)}
             </Text>
-            <View style={styles.actions}>
-              <TouchableOpacity
-                style={styles.editButton}
-                onPress={() => navigation.navigate('userEdit')}>
-                <Text style={styles.editText}>Edit</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.logoutButton} onPress={tryLogout}>
-                <Text style={styles.logoutText}>Logout</Text>
-              </TouchableOpacity>
-            </View>
           </View>
-        )}
-      </View>
+          <Text style={styles.userInfo}>
+            {user.firstname} {user.lastname}
+          </Text>
+          <View style={styles.actions}>
+            <TouchableOpacity
+              style={styles.editButton}
+              onPress={() => navigation.navigate('userEdit')}>
+              <Text style={styles.editText}>Edit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.logoutButton} onPress={tryLogout}>
+              <Text style={styles.logoutText}>Logout</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
