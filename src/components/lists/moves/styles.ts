@@ -3,11 +3,17 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {colors} from '../../../constants/colors';
 
 const styles = StyleSheet.create({
-  contentContainerStyle: {
-    width: wp('100%') - 32,
-    marginHorizontal: 16,
-    marginTop: 24,
+  flexRowCenter: {
+    flexDirection: 'row',
     alignItems: 'center',
+  },
+  contentContainerStyle: {
+    alignItems: 'center',
+    marginTop: 24,
+  },
+  listStyle: {
+    height: '100%',
+    flex: 1,
   },
   moveContainer: {
     height: 30,
@@ -25,7 +31,7 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   listFooter: {
-    paddingBottom: 48
+    paddingBottom: 48,
   },
 });
 

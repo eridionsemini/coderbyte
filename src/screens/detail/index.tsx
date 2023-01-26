@@ -251,6 +251,7 @@ const PokemonDetail = ({
         {tab === TabStatus.EVOLUTION ? <View /> : null}
         {tab === TabStatus.MOVES ? (
           <Moves
+            columns={3}
             data={pokemon.moves}
             backgroundColor={determinePokemonColor(pokemon.types[0].type.name)}
           />
