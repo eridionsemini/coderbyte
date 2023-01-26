@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {colors} from '../../constants/colors';
 
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     paddingTop: 14,
     borderRadius: 30,
     flexDirection: 'column',
-    marginBottom: 8,
+    marginBottom: Platform.OS === 'ios' ? 28 : 8,
     paddingHorizontal: 8,
     justifyContent: 'center',
     marginHorizontal: 8,
