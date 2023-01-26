@@ -11,6 +11,7 @@
     "cc": "rimraf node_modules/.cache/babel-loader/*,"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.10",
     "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-navigation/bottom-tabs": "^6.4.0",
     "@react-navigation/native": "^6.0.13",
@@ -20,6 +21,7 @@
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
     "metro-config": "^0.73.2",
     "react": "18.1.0",
+    "react-hook-form": "^7.42.1",
     "react-native": "0.70.3",
     "react-native-dotenv": "^3.3.1",
     "react-native-fast-image": "^8.6.1",
@@ -33,7 +35,8 @@
     "react-native-toast-notifications": "^3.3.1",
     "react-redux": "^8.0.4",
     "redux-logger": "^3.0.6",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

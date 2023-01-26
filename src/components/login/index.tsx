@@ -1,83 +1,57 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
-import {isValidEmail} from '../../utils/utils';
+import React from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {useForm} from 'react-hook-form';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {z, string} from 'zod';
+import Input from './input';
+import {FormValues} from './types';
 import styles from './styles';
 
 const Login: React.FC<{
   tryLogin: (email: string, password: string) => void;
   setOption: () => void;
 }> = ({tryLogin, setOption}) => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [errorMsg, setErrorMsg] = useState<string>('');
-  const [validEmail, setValidEmail] = useState<boolean>(true);
-  const [validPassword, setValidPassword] = useState<boolean>(true);
-  const emailRef = React.createRef<TextInput>();
-  const passwordRef = React.createRef<TextInput>();
+  const schema = z.object({
+    email: string().email(),
+    password: string().min(6),
+  });
 
-  const submit = () => {
-    if (!isValidEmail(email)) {
-      setValidEmail(false);
-      setErrorMsg('Email not valid');
-      return;
-    }
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm<FormValues>({resolver: zodResolver(schema)});
 
-    if (password.trim().length < 6) {
-      setValidPassword(false);
-      setErrorMsg('Password must be at least 6 characters');
-      return;
-    }
+  const submit = ({email, password}: FormValues) => tryLogin(email, password);
 
-    tryLogin(email, password);
-  };
   return (
     <View style={styles.login}>
       <Text style={styles.title}>Welcome to Pokedex</Text>
-      <TextInput
-        style={validEmail ? styles.input : styles.inputError}
-        value={email}
-        ref={emailRef}
-        underlineColorAndroid="transparent"
+      <Input
+        name="email"
+        secureTextEntry={false}
+        style={errors.email ? styles.inputError : styles.input}
         returnKeyType="next"
-        onSubmitEditing={() => passwordRef.current?.focus()}
-        placeholder="Email"
-        onChangeText={text => {
-          setEmail(text);
-          setValidEmail(true);
-        }}
+        control={control}
       />
-      {!validEmail ? <Text style={styles.error}>{errorMsg} </Text> : null}
-      <TextInput
-        style={validPassword ? styles.input : styles.inputError}
-        value={password}
-        ref={passwordRef}
-        underlineColorAndroid="transparent"
-        secureTextEntry
-        placeholder="Password"
+      {errors.email ? (
+        <Text style={styles.error}>{errors.email.message} </Text>
+      ) : null}
+      <Input
+        style={errors.password ? styles.inputError : styles.input}
+        name="password"
+        control={control}
+        secureTextEntry={true}
+        onSubmitEditing={handleSubmit(submit)}
         returnKeyType="go"
-        onSubmitEditing={submit}
-        onChangeText={text => {
-          setValidPassword(true);
-          setPassword(text);
-        }}
       />
-      {!validPassword ? <Text style={styles.error}>{errorMsg} </Text> : null}
+      {errors.password ? (
+        <Text style={styles.error}>{errors.password.message} </Text>
+      ) : null}
       <TouchableOpacity
-        disabled={email === '' || password === ''}
-        onPress={submit}
-        style={
-          email === '' || password === ''
-            ? styles.loginButtonDisabled
-            : styles.loginButton
-        }>
-        <Text
-          style={
-            email === '' || password === ''
-              ? styles.loginButtonTextDisabled
-              : styles.loginButtonText
-          }>
-          Login
-        </Text>
+        onPress={handleSubmit(submit)}
+        style={styles.loginButton}>
+        <Text style={styles.loginButtonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.createAccountLogin} onPress={setOption}>
         <Text style={styles.createAccountText}>Create Account</Text>

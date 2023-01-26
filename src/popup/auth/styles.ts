@@ -31,12 +31,13 @@ const styles = StyleSheet.create({
   },
   close: {
     alignSelf: 'flex-end',
-    height: 34,
-    width: 34,
+    height: 36,
+    width: 36,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 17,
+    borderRadius: 18,
     backgroundColor: colors.LIGHT_GREY,
+    marginRight: 4,
   },
 });
 
