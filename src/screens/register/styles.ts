@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   title: {
     color: colors.BLACK,
     fontSize: 20,
-    marginTop: 20,
     marginBottom: 20,
     lineHeight: 24,
   },

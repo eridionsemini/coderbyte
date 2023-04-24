@@ -1,16 +1,23 @@
-import React, { useState } from "react";
-import { PermissionsAndroid, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
-import { useDispatch } from "react-redux";
-import ImagePicker from "react-native-image-crop-picker";
-import AvatarImage from "../../components/image";
-import { saveUserData } from "../../redux/auth/authSlice";
-import { isValidEmail } from "../../utils/utils";
-import Button from "../../components/button";
-import styles from "./styles";
-import CommonStyles from "../../constants/styles";
-import { RootStackProps } from "../../navigators/types";
-import { AppDispatch } from "../../redux";
-import { Focus } from "./types";
+import React, {useState} from 'react';
+import {
+  PermissionsAndroid,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import {useDispatch} from 'react-redux';
+import ImagePicker from 'react-native-image-crop-picker';
+import AvatarImage from '../../components/image';
+import {saveUserData} from '../../redux/auth/authSlice';
+import {isValidEmail} from '../../utils/utils';
+import Button from '../../components/button';
+import styles from './styles';
+import CommonStyles from '../../constants/styles';
+import {RootStackProps} from '../../navigators/types';
+import {AppDispatch} from '../../redux';
+import {Focus} from './types';
 
 const Register: React.FC<{
   navigation: RootStackProps['navigation'];
@@ -36,7 +43,6 @@ const Register: React.FC<{
   const defineDisable = () => email === '' || password === '';
 
   const selectImage = async () => {
-    await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
     ImagePicker.openCamera({
       width: 100,
       height: 100,

@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     color: colors.WHITE,
-    textTransform: 'capitalize',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
   buttonDisabled: {
     height: 40,
@@ -29,7 +30,8 @@ const styles = StyleSheet.create({
   buttonTextDisabled: {
     fontSize: 16,
     color: colors.BLACK,
-    textTransform: 'capitalize',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
 });
 
