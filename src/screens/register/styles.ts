@@ -3,14 +3,27 @@ import {colors} from '../../constants/colors';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    alignItems: 'center',
+    marginVertical: 40,
+    justifyContent: 'space-between',
+  },
   register: {
     alignItems: 'center',
+    marginTop: 40,
   },
   title: {
     color: colors.BLACK,
     fontSize: 20,
     marginTop: 20,
     marginBottom: 20,
+    lineHeight: 24,
+  },
+  subtitle: {
+    color: colors.BLACK,
+    fontSize: 16,
+    lineHeight: 20,
   },
   input: {
     height: 40,
@@ -19,7 +32,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     paddingHorizontal: 16,
     backgroundColor: colors.LIGHT_GREY,
-    borderRadius: 20,
+    borderRadius: 10,
     marginBottom: 20,
   },
   inputError: {
@@ -29,40 +42,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     paddingHorizontal: 16,
     backgroundColor: colors.LIGHT_GREY,
-    borderRadius: 20,
+    borderRadius: 10,
     marginBottom: 20,
     borderColor: 'red',
     borderWidth: 1,
-  },
-  registerButton: {
-    height: 40,
-    width: wp('100%') - 128,
-    marginHorizontal: 64,
-    borderRadius: 20,
-    backgroundColor: colors.BLACK,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 50,
-  },
-  registerButtonText: {
-    fontSize: 16,
-    color: colors.WHITE,
-    textTransform: 'capitalize',
-  },
-  registerButtonDisabled: {
-    height: 40,
-    width: wp('100%') - 128,
-    marginHorizontal: 64,
-    borderRadius: 20,
-    backgroundColor: colors.LIGHT_GREY,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 50,
-  },
-  registerButtonTextDisabled: {
-    fontSize: 16,
-    color: colors.BLACK,
-    textTransform: 'capitalize',
   },
   backLogin: {
     marginTop: 10,

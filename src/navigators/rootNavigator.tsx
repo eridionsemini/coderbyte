@@ -1,8 +1,8 @@
 import React from 'react';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import UserTabNavi from './userNavigator';
-import PokemonDetail from '../screens/detail';
+import Register from '../screens/register';
+import Login from '../screens/login';
 import {RootStackParamList, headerOptions, navigationRef} from './types';
 import {colors} from '../constants/colors';
 
@@ -19,7 +19,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 const RootStackNavi = () => {
   return (
     <Stack.Navigator
-      initialRouteName="UserTabNavi"
+      initialRouteName="register"
       screenOptions={{
         headerTintColor: 'white',
         headerTitleStyle: {
@@ -31,16 +31,11 @@ const RootStackNavi = () => {
         headerShown: false,
       }}>
       <Stack.Screen
-        name="UserTabNavi"
-        component={UserTabNavi}
+        name="register"
+        component={Register}
         options={headerOptions}
       />
-      <Stack.Screen
-        name="PokemonDetail"
-        initialParams={{id: 0}}
-        component={PokemonDetail}
-        options={headerOptions}
-      />
+      <Stack.Screen name="login" component={Login} options={headerOptions} />
     </Stack.Navigator>
   );
 };

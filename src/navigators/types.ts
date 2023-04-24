@@ -1,40 +1,12 @@
-import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {StackScreenProps} from '@react-navigation/stack';
 import {createNavigationContainerRef} from '@react-navigation/native';
 
-export type BottomTabNaviParams = {
-  home: undefined;
-  wish: undefined;
-  profile: undefined;
-};
-
-export type BottomProps = BottomTabBarProps;
-
 export type RootStackParamList = {
-  UserTabNavi: BottomTabNaviParams;
-  PokemonDetail: {id: number};
+  register: undefined;
+  login: undefined;
 };
 
-export type RootStackProps = StackScreenProps<
-  RootStackParamList,
-  'PokemonDetail',
-  'MyStack'
->;
-
-export type HomeStackParamList = {
-  userHome: undefined;
-};
-
-export type ProfileStackParamList = {
-  userProfile: undefined;
-  userEdit: undefined;
-};
-
-export type ProfileStackProps = StackScreenProps<ProfileStackParamList>;
-
-export type WishStackParamList = {
-  userWish: undefined;
-};
+export type RootStackProps = StackScreenProps<RootStackParamList>;
 
 type HeaderOptions = {
   headerShown: boolean;
