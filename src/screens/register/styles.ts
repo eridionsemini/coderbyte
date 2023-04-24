@@ -35,6 +35,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 20,
   },
+  activeInput: {
+    height: 40,
+    color: colors.BLACK,
+    width: wp('100%') - 32,
+    marginHorizontal: 16,
+    paddingHorizontal: 16,
+    backgroundColor: colors.WHITE,
+    borderRadius: 10,
+    marginBottom: 20,
+    borderColor: colors.PURPLE,
+    borderWidth: 1,
+  },
   inputError: {
     height: 40,
     color: colors.BLACK,

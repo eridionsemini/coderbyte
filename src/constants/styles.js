@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from './colors';
 
 const styles = StyleSheet.create({
   mh8: {
@@ -39,6 +40,9 @@ const styles = StyleSheet.create({
   },
   alignCenter: {
     alignItems: 'center',
+  },
+  link: {
+    color: colors.PURPLE,
   },
 });
 
