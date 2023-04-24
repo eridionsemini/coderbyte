@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   infoContainer: {
-    marginTop: 40
+    marginTop: 40,
   },
   welcome: {
     color: colors.BLACK,
